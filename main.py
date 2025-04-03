@@ -27,7 +27,7 @@ class budget_machine:
                         print(" 3-Show Account Details")
                         print(" 4-Add Record for today")
                         print(" 5-Full Record")
-                        print(" 7-Exit..")
+                        print(" 6-Exit..")
                         option=help.number_input()
                         match option:
                             case 1:
@@ -51,8 +51,7 @@ class budget_machine:
                                 print("Returing...")
                                 break
                             case _:
-                                print("\nInvalid opiton..")
-                               
+                                print("\nInvalid opiton..")                               
                 case 2:
                     print("\n**Sign-up Section**")
                     person.Signup()

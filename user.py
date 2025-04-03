@@ -47,6 +47,8 @@ class User:
     
     def Signin(self):
         name = self.get_name_signin()
+        if name=="exit":
+            return 0
         if name:
             if self.get_password_signin(name):
                 print(f"✨Welcome back, {name.title()}!")
@@ -69,10 +71,14 @@ class User:
         cursor.execute("SELECT * FROM user_details")
         members = cursor.fetchall()
         while True:  
-            name = input("\nEnter user name: ").lower().strip()
+            name = input("\nEnter user name or X to exit: ").lower().strip()
             if any(name == member[1] for member in members):
                 print("✅ Name Found.")
                 return name
+            elif name=="x":
+                print("Returning")
+                return "exit"
+
             else:
                 print("❌ Name not found")
     
@@ -95,10 +101,12 @@ class User:
         cursor.execute("SELECT * FROM user_details")
         members = cursor.fetchall()
         while True:
-            email = input("\nEnter user email: ").lower().strip()
+            email = input("\nEnter user email or x to exit: ").lower().strip()
             if any(email == member[2] for member in members):
                 print("✅ User email Found.")
                 return email
+            elif email=="x":
+                return "exit"
             else:
                 print("❌ Email not found")
 
@@ -140,6 +148,8 @@ class User:
 
     def forget_password(self,name):
         email=self.get_email_signin()
+        if email=="exit":
+            return 0
         cursor.execute("SELECT password FROM user_details WHERE name = ? AND email = ?", (name, email))
         result = cursor.fetchone()
         if result:
